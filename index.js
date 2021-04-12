@@ -44,7 +44,15 @@ async function main() {
 main().catch(console.error)
 
 
-async
+async function findOnceListingByName(client, nameOfListing) {
+  const result  = await client.db('sample_airbnb').collection('listingsAndRevies').findOne({ name: nameOfListing})
+  if (result) {
+    console.log(`Found a listing in the collenctionw with the name ${nameOfListing}`)
+    console.log(result)
+  } else {
+    console.log(`No listings found with the name ${nameOfListing}`)
+  }
+} 
 
 async function createListing(client, newListing) {
   const result = await client.db("sample_airbnb").collection("listingsAndReviews").insertOne(newListing)
