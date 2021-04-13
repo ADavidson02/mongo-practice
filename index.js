@@ -11,29 +11,7 @@ async function main() {
     //Connect to MongoDB cluster
     await client.connect()
     //Make appropriate DB calls
- await createMultileListings(client, [
-   {
-     name: 'Infinite Views',
-     summary: 'Modern home with infinite views from the pool',
-     bedrooms: 5,
-     bathrooms: 4.5,
-     beds: 5,
-   },
-   {
-     name: 'Private room in London',
-     property_type: 'Apartment',
-     bedrooms: 1,
-     bathrooms: 0,
-   },
-   {
-     name: 'Beautiful Beach House',
-     property_type:
-       'Enjoy relaxed beach living in this house with a private beach',
-     bedrooms: 4,
-     bathrooms: 2,
-     last_review: new Date(),
-   },
- ]);
+ await findOneListingByName(client, 'Infinite Views');
   } catch(e) {
     console.error(e)
   }finally {
@@ -44,8 +22,11 @@ async function main() {
 main().catch(console.error)
 
 
-async function findOnceListingByName(client, nameOfListing) {
-  const result  = await client.db('sample_airbnb').collection('listingsAndRevies').findOne({ name: nameOfListing})
+async function findOneListingByName(client, nameOfListing) {
+  const result = await client
+    .db('sample_airbnb')
+    .collection('listingsAndReviews')
+    .findOne({ name: nameOfListing });
   if (result) {
     console.log(`Found a listing in the collenctionw with the name ${nameOfListing}`)
     console.log(result)
