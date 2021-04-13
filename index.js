@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 
 async function main() {
-  const uri = "mongodb+srv://Amanda:720Stonehaven@cluster0.igsx0.mongodb.net/sample_airbnb?retryWrites=true&w=majority"
+  const uri = 
   const client = new MongoClient(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
